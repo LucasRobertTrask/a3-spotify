@@ -29,6 +29,8 @@ export class SpotifyService {
     });
   }
 
+  //reference index.js for the correct sever response format
+  
   aboutMe():Promise<ProfileData> {
     //This line is sending a request to express, which returns a promise with some data. We're then parsing the data 
     return this.sendRequestToExpress('/me').then((data) => {
@@ -46,10 +48,10 @@ export class SpotifyService {
         //takes json data from the server and maps each artist returned with a new ArtistData object
         return data.artists.items.map((artist:any) => new ArtistData(artist))
       } else if (category == "album"){
-        //takes json data from the server and maps each artist returned with a new ArtistData object
+        //takes json data from the server and maps each album returned with a new AlbumData object
         return data.albums.items.map((album:any) => new AlbumData(album))
       } else {
-        //takes json data from the server and maps each artist returned with a new ArtistData object
+        //takes json data from the server and maps each track returned with a new TrackData object
         return data.tracks.items.map((track:any) => new TrackData(track))
       }
     });
